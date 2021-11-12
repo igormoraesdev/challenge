@@ -8,12 +8,16 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
+    'eslint-config-prettier',
   ],
   parserOptions: {
     project: './tsconfig.json',
+    sourceType: 'module',
+    ecmaVersion: 2021,
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
     indent: ['error', 2, {SwitchCase: 1}],
     quotes: ['error', 'single', {avoidEscape: true}],

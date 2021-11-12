@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint src --max-warnings=0",
     "prettier": "prettier --write"
   },
   "dependencies": {
@@ -51,10 +51,8 @@
     ]
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "yarn lint"
-    ],
-    "./src/**": [
+    "src/**/*": [
+      "yarn lint --fix",
       "yarn prettier"
     ]
   },

@@ -11,10 +11,6 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'react',
-    'react-hooks',
-    '@typescript-eslint',
-    'prettier',
   ],
   parserOptions: {
     project: './tsconfig.json',
@@ -27,6 +23,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
   },
   settings: {
     react: {

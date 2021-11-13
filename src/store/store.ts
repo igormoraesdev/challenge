@@ -3,6 +3,14 @@ import {configureStore} from '@reduxjs/toolkit';
 import {combineReducers} from 'redux';
 import logger from 'redux-logger';
 import {persistStore, persistReducer} from 'redux-persist';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist/es/constants';
 
 import {userSlice, userSliceName} from './slices';
 
@@ -23,7 +31,10 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       immutableCheck: {warnAfter: 128},
-      serializableCheck: {warnAfter: 128},
+      serializableCheck: {
+        warnAfter: 128,
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
     })
       .prepend()
       .concat(logger),

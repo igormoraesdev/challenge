@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from '@reduxjs/toolkit';
 import {combineReducers} from 'redux';
-import logger from 'redux-logger';
 import {persistStore, persistReducer} from 'redux-persist';
 import {
   FLUSH,
@@ -10,7 +9,7 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-} from 'redux-persist/es/constants';
+} from 'redux-persist/lib/constants';
 
 import {userSlice, userSliceName} from './slices';
 
@@ -35,9 +34,7 @@ const store = configureStore({
         warnAfter: 128,
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .prepend()
-      .concat(logger),
+    }).prepend(),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

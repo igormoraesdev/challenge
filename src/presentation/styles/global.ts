@@ -12,13 +12,18 @@ export const theme = {
     },
   },
   fontSize: {
-    h1: 28,
+    h1: 32,
+    h2: 26,
+    h3: 22,
+    h4: 20,
     p: 16,
     span: 14,
   },
   colors: {
     white: '#fff',
     black: '#1e1e1e',
+    blue: '#58dcf2',
+    yellow: '#fadd02',
   },
   spacing: {
     big: 16,

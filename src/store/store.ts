@@ -11,10 +11,10 @@ import {
   REHYDRATE,
 } from 'redux-persist/lib/constants';
 
-import {userSlice, userSliceName} from './slices';
+import {tvShowSlice, tvShowSliceName} from './slices';
 
 const rootReducer = combineReducers({
-  [userSliceName]: userSlice.reducer,
+  [tvShowSliceName]: tvShowSlice.reducer,
 });
 
 const persistConfig = {
@@ -37,7 +37,7 @@ const store = configureStore({
     }).prepend(),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type AppState = ReturnType<typeof store['getState']>;
 
 export const persistor = persistStore(store);
 

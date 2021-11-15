@@ -4,6 +4,6 @@ import {makeApiUrl, makeAxiosHttpClient} from '../http';
 
 export const makeRemoteLoadEpisodes = (id: string): LoadEpisodesList =>
   new RemoteLoadEpisodeList(
-    makeApiUrl(`/${id}/episodes'`),
+    makeApiUrl(`/${id}/episodes`),
     makeAxiosHttpClient(),
   );

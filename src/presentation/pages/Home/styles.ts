@@ -77,13 +77,12 @@ export const style = StyleSheet.create({
   },
   episodeImageCarousel: {
     width: 80,
-    height: '100%',
+    height: 80,
     borderRadius: 10,
     marginBottom: theme.spacing.regular,
   },
   episodeContentContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     paddingRight: theme.spacing.big,
     marginBottom: theme.spacing.big,
   },
@@ -108,8 +107,8 @@ export const style = StyleSheet.create({
     marginBottom: theme.spacing.big,
   },
   imageCarousel: {
-    width: 80,
-    height: 80,
+    width: 50,
+    height: 50,
     borderRadius: 100,
     marginBottom: theme.spacing.regular,
   },

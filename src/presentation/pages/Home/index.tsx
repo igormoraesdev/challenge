@@ -1,4 +1,5 @@
-import React from 'react';
+import {MotiView} from 'moti';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Image,
@@ -8,6 +9,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
+import {EpisodesModel} from '../../../domain';
+import {makeRemoteLoadEpisodes} from '../../../main/factories/usecases';
 import {Row, Typography} from '../../components';
 import {theme} from '../../styles';
 import {style} from './styles';
@@ -15,6 +18,16 @@ import {style} from './styles';
 Icon.loadFont();
 
 const Home = () => {
+  const [episodes, setEpisodes] = useState<EpisodesModel[] | undefined>([]);
+  const [seasons] = useState<number>(1);
+  const handleEpisodes = async () => {
+    const episodesList = await makeRemoteLoadEpisodes('6771').load();
+    setEpisodes(episodesList);
+  };
+  useEffect(() => {
+    handleEpisodes();
+  }, []);
+
   return (
     <ScrollView style={style.scroll}>
       <Image
@@ -47,7 +60,17 @@ const Home = () => {
             <Typography style={style.labelText}>Animation</Typography>
           </Row>
           <Row>
-            <Icon name="star" size={20} color={theme.colors.yellow} />
+            <MotiView
+              from={{rotate: '0deg'}}
+              animate={{rotate: '360deg'}}
+              transition={{
+                loop: true,
+                type: 'timing',
+                duration: 1500,
+              }}
+            >
+              <Icon name="star" size={20} color={theme.colors.yellow} />
+            </MotiView>
             <Typography size="h4" familyType="bold" style={style.labelText}>
               5.28
             </Typography>
@@ -84,68 +107,61 @@ const Home = () => {
               </Typography>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={style.episodeContentContainer}
-          >
-            <Image
-              style={style.episodeImageCarousel}
-              resizeMethod="auto"
-              resizeMode="cover"
-              source={{
-                uri: 'https://static.tvmaze.com/uploads/images/original_untouched/25/64242.jpg',
-              }}
-            />
-            <View style={style.episodeContent}>
-              <Typography
-                size="p"
-                fontFamily="roboto"
-                familyType="bold"
-                style={style.episodeTitle}
+          {episodes
+            ?.filter((episode) => episode?.season === seasons)
+            ?.map((episode, index) => (
+              <MotiView
+                from={{
+                  opacity: 0,
+                  translateX: -100,
+                }}
+                animate={{
+                  opacity: 1,
+                  translateX: 0,
+                }}
+                transition={{
+                  delay: index * 100,
+                  duration: 500,
+                  type: 'timing',
+                }}
+                key={episode?.id}
               >
-                EP.1 - Escape from Monster Island
-              </Typography>
-              <Typography
-                size="span"
-                familyType="medium"
-                style={style.episodeDescription}
-              >
-                Bubbles wins two tickets to a concert and has to pick between
-                Blossom and Buttercup to go with her.
-              </Typography>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={style.episodeContentContainer}
-          >
-            <Image
-              style={style.episodeImageCarousel}
-              resizeMethod="auto"
-              resizeMode="cover"
-              source={{
-                uri: 'https://static.tvmaze.com/uploads/images/original_untouched/25/64242.jpg',
-              }}
-            />
-            <View style={style.episodeContent}>
-              <Typography
-                size="p"
-                fontFamily="roboto"
-                familyType="bold"
-                style={style.episodeTitle}
-              >
-                EP.1 - Escape from Monster Island
-              </Typography>
-              <Typography
-                size="span"
-                familyType="medium"
-                style={style.episodeDescription}
-              >
-                Bubbles wins two tickets to a concert and has to pick between
-                Blossom and Buttercup to go with her.
-              </Typography>
-            </View>
-          </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={style.episodeContentContainer}
+                >
+                  <Image
+                    style={style.episodeImageCarousel}
+                    resizeMethod="auto"
+                    resizeMode="cover"
+                    source={{
+                      uri: episode?.image?.original,
+                    }}
+                  />
+                  <View style={style.episodeContent}>
+                    <Typography
+                      size="p"
+                      fontFamily="roboto"
+                      familyType="bold"
+                      style={style.episodeTitle}
+                    >
+                      {`EP.${episode?.number} - ${episode?.name}`}
+                    </Typography>
+                    <Typography
+                      size="span"
+                      familyType="medium"
+                      style={style.episodeDescription}
+                    >
+                      {episode?.summary
+                        ? `${episode?.summary
+                            ?.replace(/<p>/g, '')
+                            .substr(0, 40)}... - See more`
+                        : 'No Description'}
+                    </Typography>
+                  </View>
+                </TouchableOpacity>
+              </MotiView>
+            ))}
         </View>
         <View style={style.carouselContainer}>
           <Typography

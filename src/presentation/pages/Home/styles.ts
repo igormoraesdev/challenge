@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-    backgroundColor: theme.colors.black,
+    backgroundColor: theme.colors.white,
   },
   imageContainer: {
     width,
@@ -61,7 +61,7 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: theme.colors.blue,
     borderWidth: 4,
-    borderColor: theme.colors.white,
+    borderColor: theme.colors.black,
     marginLeft: theme.spacing.big,
   },
   seasonButton: {
@@ -72,11 +72,15 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: theme.colors.white,
+    borderColor: theme.colors.black,
     marginLeft: theme.spacing.big,
   },
   carouselContainer: {
-    paddingBottom: 16,
+    paddingBottom: theme.spacing.big,
+  },
+  carousel: {
+    paddingTop: theme.spacing.big,
+    margin: -theme.spacing.big,
   },
   carouselContentContainer: {
     alignItems: 'center',
@@ -86,9 +90,12 @@ export const style = StyleSheet.create({
     marginBottom: theme.spacing.big,
   },
   imageCarousel: {
-    width: 50,
-    height: 50,
+    padding: theme.spacing.regular,
+    width: 80,
+    height: 80,
     borderRadius: 100,
     marginBottom: theme.spacing.regular,
+    borderWidth: 2,
+    borderColor: theme.colors.black,
   },
 });

@@ -66,7 +66,9 @@ const Home = ({navigation}: Props) => {
             >
               Type:
             </Typography>
-            <Typography style={style.labelText}>Animation</Typography>
+            <Typography familyType="medium" style={style.labelText}>
+              Animation
+            </Typography>
           </Row>
           <Row>
             <MotiView
@@ -94,11 +96,11 @@ const Home = ({navigation}: Props) => {
           >
             Genres:
           </Typography>
-          <Typography style={style.labelText}>
+          <Typography familyType="medium" style={style.labelText}>
             Comedy ● Action ● Science-Fiction
           </Typography>
         </Row>
-        <Typography style={style.description}>
+        <Typography familyType="medium" style={style.description}>
           The city of Townsville may be a beautiful, bustling metropolis, but
           don't be fooled!
         </Typography>
@@ -149,10 +151,10 @@ const Home = ({navigation}: Props) => {
             Casts:
           </Typography>
           <FlatList
+            style={style.carousel}
             data={[1, 2, 3, 4, 5, 6, 7, 8]}
             decelerationRate="normal"
             showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={200}
             horizontal
             ItemSeparatorComponent={() => <View style={{width: 16}} />}
             renderItem={() => (
@@ -165,7 +167,11 @@ const Home = ({navigation}: Props) => {
                     uri: 'https://static.tvmaze.com/uploads/images/original_untouched/25/64242.jpg',
                   }}
                 />
-                <Typography size="span" style={style.labelText}>
+                <Typography
+                  familyType="medium"
+                  size="h4"
+                  style={style.labelText}
+                >
                   Bubbles
                 </Typography>
               </View>

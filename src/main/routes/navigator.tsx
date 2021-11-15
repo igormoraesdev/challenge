@@ -25,9 +25,14 @@ const AppNavigator = () => {
           options={{headerShown: false}}
           name="Details"
           component={PageDetails}
-          sharedElements={(route, otherRoute, showing) => {
+          sharedElements={(route) => {
             const {item} = route.params;
-            return [`item.${item.id}.photo`];
+            return [
+              {
+                id: `item.${item.id}.photo`,
+                animation: 'fade-in',
+              },
+            ];
           }}
         />
       </Stack.Navigator>

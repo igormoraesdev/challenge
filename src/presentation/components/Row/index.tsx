@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {View} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 
 import {styles} from './styles';
 
@@ -11,11 +11,12 @@ type Props = {
     | 'space-around'
     | 'space-evenly'
     | 'space-between';
+  style?: ViewStyle;
 };
 
-const Row = ({children, justifyContent, ...rest}: Props) => {
+const Row = ({children, justifyContent, style, ...rest}: Props) => {
   return (
-    <View {...rest} style={[styles.container, {justifyContent}]}>
+    <View {...rest} style={[styles.container, style, {justifyContent}]}>
       {children}
     </View>
   );

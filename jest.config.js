@@ -9,6 +9,6 @@ module.exports = {
       '<rootDir>/src/main/config/jest/assetsTransformer.ts',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|@react-native-vector-icons)',
+    'node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|@react-native-vector-icons|react-navigation-shared-element)',
   ],
 };

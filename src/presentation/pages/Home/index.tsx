@@ -33,8 +33,8 @@ const Home = ({navigation}: Props) => {
     handleEpisodes();
   }, []);
 
-  const handleNavigate = () => {
-    navigation?.navigate('Details');
+  const handleNavigate = (episode: EpisodesModel) => {
+    navigation?.navigate('Details', {item: episode});
   };
 
   return (

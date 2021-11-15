@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, Image, View} from 'react-native';
+import {SharedElement} from 'react-navigation-shared-element';
 
 import {EpisodesModel} from '../../../../../domain';
 import {Typography} from '../../../../components';
@@ -7,24 +8,26 @@ import {style} from './styles';
 
 type Props = {
   episode: EpisodesModel;
-  onClick: () => void;
+  onClick: (episode: EpisodesModel) => void;
 };
 
 const EpisodeItem = ({episode, onClick}: Props) => {
   return (
     <TouchableOpacity
-      onPress={onClick}
+      onPress={() => onClick(episode)}
       activeOpacity={0.7}
       style={style.episodeContentContainer}
     >
-      <Image
-        style={style.episodeImageCarousel}
-        resizeMethod="auto"
-        resizeMode="cover"
-        source={{
-          uri: episode?.image?.original,
-        }}
-      />
+      <SharedElement id={`item.${episode.id}.photo`}>
+        <Image
+          style={style.episodeImageCarousel}
+          resizeMethod="auto"
+          resizeMode="cover"
+          source={{
+            uri: episode?.image?.original,
+          }}
+        />
+      </SharedElement>
       <View style={style.episodeContent}>
         <Typography
           size="p"

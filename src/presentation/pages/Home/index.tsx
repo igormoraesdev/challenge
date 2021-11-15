@@ -1,3 +1,4 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MotiView} from 'moti';
 import React, {useEffect, useState} from 'react';
 import {
@@ -11,13 +12,17 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 import {EpisodesModel} from '../../../domain';
 import {makeRemoteLoadEpisodes} from '../../../main/factories/usecases';
+import {RootStackParamList} from '../../../main/routes/navigator';
 import {Row, Typography} from '../../components';
 import {theme} from '../../styles';
+import {EpisodeItem} from './components';
 import {style} from './styles';
 
 Icon.loadFont();
 
-const Home = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const Home = ({navigation}: Props) => {
   const [episodes, setEpisodes] = useState<EpisodesModel[] | undefined>([]);
   const [seasons] = useState<number>(1);
   const handleEpisodes = async () => {
@@ -27,6 +32,10 @@ const Home = () => {
   useEffect(() => {
     handleEpisodes();
   }, []);
+
+  const handleNavigate = () => {
+    navigation?.navigate('Details');
+  };
 
   return (
     <ScrollView style={style.scroll}>
@@ -126,40 +135,7 @@ const Home = () => {
                 }}
                 key={episode?.id}
               >
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={style.episodeContentContainer}
-                >
-                  <Image
-                    style={style.episodeImageCarousel}
-                    resizeMethod="auto"
-                    resizeMode="cover"
-                    source={{
-                      uri: episode?.image?.original,
-                    }}
-                  />
-                  <View style={style.episodeContent}>
-                    <Typography
-                      size="p"
-                      fontFamily="roboto"
-                      familyType="bold"
-                      style={style.episodeTitle}
-                    >
-                      {`EP.${episode?.number} - ${episode?.name}`}
-                    </Typography>
-                    <Typography
-                      size="span"
-                      familyType="medium"
-                      style={style.episodeDescription}
-                    >
-                      {episode?.summary
-                        ? `${episode?.summary
-                            ?.replace(/<p>/g, '')
-                            .substr(0, 40)}... - See more`
-                        : 'No Description'}
-                    </Typography>
-                  </View>
-                </TouchableOpacity>
+                <EpisodeItem onClick={handleNavigate} episode={episode} />
               </MotiView>
             ))}
         </View>

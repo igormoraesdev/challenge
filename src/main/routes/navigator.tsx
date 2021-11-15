@@ -4,7 +4,12 @@ import React from 'react';
 
 import {PageHome, PageDetails} from '../../presentation/pages';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  Details: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
   return (

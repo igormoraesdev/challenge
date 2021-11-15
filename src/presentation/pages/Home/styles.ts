@@ -75,27 +75,6 @@ export const style = StyleSheet.create({
     borderColor: theme.colors.white,
     marginLeft: theme.spacing.big,
   },
-  episodeImageCarousel: {
-    width: 80,
-    height: 80,
-    borderRadius: 10,
-    marginBottom: theme.spacing.regular,
-  },
-  episodeContentContainer: {
-    flexDirection: 'row',
-    paddingRight: theme.spacing.big,
-    marginBottom: theme.spacing.big,
-  },
-  episodeContent: {
-    marginLeft: theme.spacing.big,
-    flex: 1,
-  },
-  episodeTitle: {
-    marginBottom: theme.spacing.regular,
-  },
-  episodeDescription: {
-    // flex: 1,
-  },
   carouselContainer: {
     paddingBottom: 16,
   },

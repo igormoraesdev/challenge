@@ -1,19 +1,15 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MotiView} from 'moti';
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Image,
-  ScrollView,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {useDispatch} from 'react-redux';
 
 import {EpisodesModel} from '../../../domain';
-import {makeRemoteLoadEpisodes} from '../../../main/factories/usecases';
 import {RootStackParamList} from '../../../main/routes/navigator';
+import {fetchEpisodes} from '../../../store/slices/tvshow/api';
 import {Row, Typography} from '../../components';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import {theme} from '../../styles';
 import {EpisodeItem} from './components';
 import {style} from './styles';
@@ -23,14 +19,12 @@ Icon.loadFont();
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
-  const [episodes, setEpisodes] = useState<EpisodesModel[] | undefined>([]);
+  const {episodesList} = useAppSelector(({tvShowSlice}) => tvShowSlice);
   const [seasons] = useState<number>(1);
-  const handleEpisodes = async () => {
-    const episodesList = await makeRemoteLoadEpisodes('6771').load();
-    setEpisodes(episodesList);
-  };
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    handleEpisodes();
+    dispatch(fetchEpisodes());
   }, []);
 
   const handleNavigate = (episode: EpisodesModel) => {
@@ -48,15 +42,54 @@ const Home = ({navigation}: Props) => {
         }}
       />
       <View style={style.containerContent}>
-        <Typography
-          fontFamily="montSerrat"
-          familyType="bold"
-          size="h1"
-          style={style.title}
+        <MotiView
+          from={{opacity: 0}}
+          animate={{opacity: 1}}
+          transition={{
+            type: 'timing',
+            duration: 500,
+            delay: 500,
+          }}
         >
-          PowerPuff Girls
-        </Typography>
-        <Row justifyContent="space-between">
+          <Typography
+            fontFamily="montSerrat"
+            familyType="bold"
+            size="h1"
+            style={style.title}
+          >
+            PowerPuff Girls
+          </Typography>
+          <Row justifyContent="space-between">
+            <Row>
+              <Typography
+                fontFamily="roboto"
+                familyType="bold"
+                size="p"
+                style={style.label}
+              >
+                Type:
+              </Typography>
+              <Typography familyType="medium" style={style.labelText}>
+                Animation
+              </Typography>
+            </Row>
+            <Row>
+              <MotiView
+                from={{rotate: '0deg'}}
+                animate={{rotate: '360deg'}}
+                transition={{
+                  loop: true,
+                  type: 'timing',
+                  duration: 1000,
+                }}
+              >
+                <Icon name="star" size={20} color={theme.colors.yellow} />
+              </MotiView>
+              <Typography size="h4" familyType="bold" style={style.labelText}>
+                5.28
+              </Typography>
+            </Row>
+          </Row>
           <Row>
             <Typography
               fontFamily="roboto"
@@ -64,48 +97,28 @@ const Home = ({navigation}: Props) => {
               size="p"
               style={style.label}
             >
-              Type:
+              Genres:
             </Typography>
             <Typography familyType="medium" style={style.labelText}>
-              Animation
+              Comedy ● Action ● Science-Fiction
             </Typography>
           </Row>
-          <Row>
-            <MotiView
-              from={{rotate: '0deg'}}
-              animate={{rotate: '360deg'}}
-              transition={{
-                loop: true,
-                type: 'timing',
-                duration: 1500,
-              }}
-            >
-              <Icon name="star" size={20} color={theme.colors.yellow} />
-            </MotiView>
-            <Typography size="h4" familyType="bold" style={style.labelText}>
-              5.28
-            </Typography>
-          </Row>
-        </Row>
-        <Row>
-          <Typography
-            fontFamily="roboto"
-            familyType="bold"
-            size="p"
-            style={style.label}
-          >
-            Genres:
+          <Typography familyType="medium" style={style.description}>
+            The city of Townsville may be a beautiful, bustling metropolis, but
+            don't be fooled!
           </Typography>
-          <Typography familyType="medium" style={style.labelText}>
-            Comedy ● Action ● Science-Fiction
-          </Typography>
-        </Row>
-        <Typography familyType="medium" style={style.description}>
-          The city of Townsville may be a beautiful, bustling metropolis, but
-          don't be fooled!
-        </Typography>
+        </MotiView>
         <View style={style.seasonContainer}>
-          <View style={style.seasonTitleContainer}>
+          <MotiView
+            from={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{
+              type: 'timing',
+              duration: 500,
+              delay: 500,
+            }}
+            style={style.seasonTitleContainer}
+          >
             <Typography size="p" fontFamily="roboto" familyType="bold">
               Seasons:
             </Typography>
@@ -117,8 +130,8 @@ const Home = ({navigation}: Props) => {
                 1
               </Typography>
             </TouchableOpacity>
-          </View>
-          {episodes
+          </MotiView>
+          {episodesList
             ?.filter((episode) => episode?.season === seasons)
             ?.map((episode, index) => (
               <MotiView
@@ -141,7 +154,7 @@ const Home = ({navigation}: Props) => {
               </MotiView>
             ))}
         </View>
-        <View style={style.carouselContainer}>
+        {/* <View style={style.carouselContainer}>
           <Typography
             style={style.carouselTitle}
             fontFamily="roboto"
@@ -177,7 +190,7 @@ const Home = ({navigation}: Props) => {
               </View>
             )}
           />
-        </View>
+        </View> */}
       </View>
     </ScrollView>
   );

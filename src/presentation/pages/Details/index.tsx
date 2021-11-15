@@ -47,7 +47,9 @@ const Details = ({route}: Props) => {
             Summary:
           </Typography>
           <Typography style={style.summaryText} familyType="bold" size="p">
-            {item?.summary?.replace(/<p>/g, '').replace('</p>', '')}
+            {item?.summary
+              ? item?.summary?.replace(/<p>/g, '').replace('</p>', '')
+              : 'Not found.'}
           </Typography>
         </MotiView>
         <MotiView

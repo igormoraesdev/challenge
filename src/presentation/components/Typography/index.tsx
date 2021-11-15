@@ -8,7 +8,7 @@ type Props = {
   children: ReactChild | ReactChild[];
   fontFamily?: 'montSerrat' | 'roboto';
   familyType?: 'bold' | 'regular' | 'medium';
-  size?: 'h1' | 'p' | 'span';
+  size?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
   style?: TextStyle;
 };
 
@@ -32,8 +32,11 @@ const Typography = ({
   };
 
   const sizes = {
-    p: theme.fontSize.p,
     h1: theme.fontSize.h1,
+    h2: theme.fontSize.h2,
+    h3: theme.fontSize.h3,
+    h4: theme.fontSize.h4,
+    p: theme.fontSize.p,
     span: theme.fontSize.span,
   };
 

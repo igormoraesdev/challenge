@@ -1,1 +1,1 @@
-export * from './tvshow-api';
+export * from './episodes';

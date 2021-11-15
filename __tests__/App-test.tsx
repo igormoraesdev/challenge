@@ -1,6 +1,6 @@
 import 'react-native';
+import {render} from '@testing-library/react-native';
 import React from 'react';
-import renderer from 'react-test-renderer';
 
 import App from '../src/App';
 
@@ -9,6 +9,6 @@ describe('App', () => {
     jest.useFakeTimers();
   });
   it('renders correctly', async () => {
-    renderer.create(<App />);
+    render(<App />);
   });
 });

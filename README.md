@@ -22,4 +22,6 @@ Following the concept of Clean Architecture and DDD, the architecture was design
 - [Lint-Staged](https://github.com/okonet/lint-staged)
 
 ## Start project
-- Run #yarn install and yarn android.
+- In project folder run **yarn** and **yarn android**.
+
+Bee happy.

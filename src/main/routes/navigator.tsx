@@ -13,11 +13,6 @@ export type RootStackParamList = {
 const Stack = createSharedElementStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
-  const forFade = ({current}: any) => ({
-    cardStyle: {
-      opacity: current.progress,
-    },
-  });
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -30,7 +25,9 @@ const AppNavigator = () => {
           options={{
             headerShown: false,
             animationEnabled: true,
-            cardStyleInterpolator: forFade,
+            cardStyleInterpolator: (value) => ({
+              cardStyle: {opacity: value.current.progress},
+            }),
           }}
           name="Details"
           component={PageDetails}

@@ -13,16 +13,25 @@ export type RootStackParamList = {
 const Stack = createSharedElementStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
+  const forFade = ({current}: any) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
-          options={{headerShown: false}}
+          options={{headerShown: false, animationEnabled: true}}
           name="Home"
           component={PageHome}
         />
         <Stack.Screen
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+            animationEnabled: true,
+            cardStyleInterpolator: forFade,
+          }}
           name="Details"
           component={PageDetails}
           sharedElements={(route) => {

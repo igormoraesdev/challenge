@@ -98,7 +98,7 @@ export const style = StyleSheet.create({
     borderColor: theme.colors.black,
   },
   carouselContentTitle: {
-    maxWidth: 150,
+    maxWidth: 120,
     textAlign: 'center',
   },
 });

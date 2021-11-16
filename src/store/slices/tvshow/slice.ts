@@ -6,10 +6,10 @@ import {
   TvShowSliceState,
   TV_SHOWS_SLICE_INITIAL_STATE,
 } from '.';
-import {EpisodesModel} from '../../../domain';
+import {EpisodesModel, SeasonsModel} from '../../../domain';
 import {CastModel} from '../../../domain/models/cast';
 import {setEpisodesReducer} from './actions';
-import {fetchCasts, fetchEpisodes} from './api';
+import {fetchCasts, fetchEpisodes, fetchSeasons} from './api';
 
 export const tvShowSlice = createSlice<
   TvShowSliceState,
@@ -27,6 +27,9 @@ export const tvShowSlice = createSlice<
     });
     builder.addCase(fetchCasts.fulfilled, (state, {payload}) => {
       state.castList = payload as CastModel[];
+    });
+    builder.addCase(fetchSeasons.fulfilled, (state, {payload}) => {
+      state.seasonsList = payload as SeasonsModel[];
     });
   },
 });

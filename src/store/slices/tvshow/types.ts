@@ -1,4 +1,4 @@
-import {EpisodesModel} from '../../../domain';
+import {EpisodesModel, SeasonsModel} from '../../../domain';
 import {CastModel} from '../../../domain/models/cast';
 
 export const tvShowSliceName = 'tvShowSlice' as const;
@@ -12,9 +12,11 @@ export const TV_SHOWS_SLICE_ACTIONS = {
 export const TV_SHOWS_SLICE_INITIAL_STATE: TvShowSliceState = {
   episodesList: [],
   castList: [],
+  seasonsList: [],
 };
 
 export type TvShowSliceState = {
   episodesList: EpisodesModel[];
   castList: CastModel[];
+  seasonsList: SeasonsModel[];
 };

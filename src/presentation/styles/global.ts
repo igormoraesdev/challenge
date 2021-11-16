@@ -12,7 +12,7 @@ export const theme = {
     },
   },
   fontSize: {
-    h1: 32,
+    h1: 46,
     h2: 26,
     h3: 22,
     h4: 20,
@@ -26,6 +26,7 @@ export const theme = {
     yellow: '#fadd02',
   },
   spacing: {
+    large: 24,
     big: 16,
     regular: 8,
     small: 6,

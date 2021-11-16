@@ -1,7 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MotiView} from 'moti';
 import React from 'react';
-import {Image, View} from 'react-native';
+import {Image, ScrollView, View} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 
 import {RootStackParamList} from '../../../main/routes/navigator';
@@ -24,13 +24,15 @@ const Details = ({route}: Props) => {
   };
 
   return (
-    <View style={style.container}>
+    <ScrollView style={style.container}>
       <SharedElement id={`item.${item.id}.photo`}>
         <Image
           resizeMethod="auto"
           resizeMode="cover"
           style={style.image}
-          source={{uri: item?.image?.original}}
+          source={{
+            uri: item?.image?.original,
+          }}
         />
       </SharedElement>
       <View style={style.content}>
@@ -43,13 +45,11 @@ const Details = ({route}: Props) => {
             delay: 300,
           }}
         >
-          <Typography fontFamily="roboto" familyType="bold" size="span">
-            Summary:
+          <Typography style={style.label} familyType="medium" size="span">
+            Episode:
           </Typography>
-          <Typography style={style.summaryText} familyType="bold" size="p">
-            {item?.summary
-              ? item?.summary?.replace(/<p>/g, '').replace('</p>', '')
-              : 'Not found.'}
+          <Typography familyType="bold" size="p">
+            {item?.name}
           </Typography>
         </MotiView>
         <MotiView
@@ -61,14 +61,14 @@ const Details = ({route}: Props) => {
             delay: 600,
           }}
         >
-          <Row style={style.row}>
-            <Typography fontFamily="roboto" familyType="bold" size="span">
-              Episode:
-            </Typography>
-            <Typography style={style.textValue} familyType="medium" size="p">
-              {item?.name}
-            </Typography>
-          </Row>
+          <Typography style={style.label} familyType="medium" size="span">
+            Summary:
+          </Typography>
+          <Typography familyType="bold" size="p">
+            {item?.summary
+              ? item?.summary?.replace(/<p>/g, '').replace('</p>', '')
+              : 'Not found.'}
+          </Typography>
         </MotiView>
         <MotiView
           from={{opacity: 0, translateY: 30}}
@@ -79,17 +79,15 @@ const Details = ({route}: Props) => {
             delay: 900,
           }}
         >
-          <Row>
-            <Typography fontFamily="roboto" familyType="bold" size="span">
-              Airdate:
-            </Typography>
-            <Typography style={style.textValue} familyType="medium" size="p">
-              {formatDate(item?.airdate)}
-            </Typography>
-          </Row>
+          <Typography style={style.label} familyType="medium" size="span">
+            Airdate:
+          </Typography>
+          <Typography familyType="bold" size="p">
+            {formatDate(item?.airdate)}
+          </Typography>
         </MotiView>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

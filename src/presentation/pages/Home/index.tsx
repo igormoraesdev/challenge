@@ -1,13 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MotiView} from 'moti';
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {View, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useDispatch} from 'react-redux';
 
@@ -69,28 +63,18 @@ const Home = ({navigation}: Props) => {
             duration: 500,
           }}
         >
-          <Typography
-            fontFamily="montSerrat"
-            familyType="bold"
-            size="h1"
-            style={style.title}
-          >
+          <Typography familyType="medium" size="h1" style={style.title}>
             PowerPuff Girls
           </Typography>
           <Row justifyContent="space-between">
-            <Row>
-              <Typography
-                fontFamily="roboto"
-                familyType="bold"
-                size="p"
-                style={style.label}
-              >
+            <View>
+              <Typography familyType="medium" size="p" style={style.label}>
                 Type:
               </Typography>
-              <Typography familyType="medium" style={style.labelText}>
+              <Typography familyType="bold" style={style.labelText}>
                 Animation
               </Typography>
-            </Row>
+            </View>
             <Row>
               <MotiView
                 from={{rotate: '0deg'}}
@@ -103,30 +87,24 @@ const Home = ({navigation}: Props) => {
               >
                 <Icon name="star" size={20} color={theme.colors.yellow} />
               </MotiView>
-              <Typography size="h4" familyType="bold" style={style.labelText}>
+              <Typography size="h4" familyType="bold" style={style.rating}>
                 5.28
               </Typography>
             </Row>
           </Row>
-          <Row>
-            <Typography
-              fontFamily="roboto"
-              familyType="bold"
-              size="p"
-              style={style.label}
-            >
+          <View style={{marginVertical: 16}}>
+            <Typography familyType="medium" size="p" style={style.label}>
               Genres:
             </Typography>
-            <Typography familyType="medium" style={style.labelText}>
+            <Typography familyType="bold" style={style.labelText}>
               Comedy ● Action ● Science-Fiction
             </Typography>
-          </Row>
-          <Typography familyType="medium" style={style.description}>
-            The city of Townsville may be a beautiful, bustling metropolis, but
-            don't be fooled!
-          </Typography>
+          </View>
         </MotiView>
-        <View style={style.seasonContainer}>
+        {/* <View>
+          <Typography familyType="medium" size="p">
+            Seasons:
+          </Typography>
           <MotiView
             from={{opacity: 0}}
             animate={{opacity: 1}}
@@ -137,9 +115,6 @@ const Home = ({navigation}: Props) => {
             }}
             style={style.seasonTitleContainer}
           >
-            <Typography size="p" fontFamily="roboto" familyType="bold">
-              Seasons:
-            </Typography>
             {seasonsList?.map((season) => (
               <TouchableOpacity
                 key={season?.id}
@@ -159,13 +134,16 @@ const Home = ({navigation}: Props) => {
                   }}
                   style={style.seasonButton}
                 >
-                  <Typography size="h3" familyType="bold">
+                  <Typography size="h3" familyType="regular">
                     {season?.number}
                   </Typography>
                 </MotiView>
               </TouchableOpacity>
             ))}
           </MotiView>
+          <Typography familyType="medium" size="p" style={style.episodeLabel}>
+            Episodes:
+          </Typography>
           {episodesList
             ?.filter((episode) => episode?.season === selectedSeason)
             ?.map((episode, index) => (
@@ -188,7 +166,7 @@ const Home = ({navigation}: Props) => {
                 <EpisodeItem onClick={handleNavigate} episode={episode} />
               </MotiView>
             ))}
-        </View>
+        </View> */}
       </View>
       <Casts />
     </ScrollView>

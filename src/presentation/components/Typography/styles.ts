@@ -4,6 +4,6 @@ import {theme} from '../../styles';
 
 export const styles = StyleSheet.create({
   typography: {
-    color: theme.colors.black,
+    color: theme.colors.white,
   },
 });

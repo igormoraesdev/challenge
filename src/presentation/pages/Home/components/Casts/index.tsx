@@ -9,12 +9,7 @@ const Casts = () => {
   const {castList} = useAppSelector(({tvShowSlice}) => tvShowSlice);
   return (
     <View style={style.carouselContainer}>
-      <Typography
-        style={style.carouselTitle}
-        fontFamily="roboto"
-        familyType="bold"
-        size="p"
-      >
+      <Typography style={style.carouselTitle} familyType="medium" size="p">
         Casts:
       </Typography>
       <FlatList
@@ -36,7 +31,7 @@ const Casts = () => {
               }}
             />
             <Typography
-              familyType="medium"
+              familyType="bold"
               size="span"
               style={style.carouselContentTitle}
             >

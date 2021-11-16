@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.black,
   },
   imageContainer: {
     width,
@@ -21,11 +21,12 @@ export const style = StyleSheet.create({
   },
   containerContent: {
     width,
-    padding: theme.spacing.big,
+    padding: theme.spacing.large,
   },
   title: {
+    textAlign: 'center',
     textTransform: 'capitalize',
-    marginBottom: 6,
+    marginVertical: theme.spacing.large,
   },
   containerTypeRating: {
     alignItems: 'center',
@@ -37,21 +38,24 @@ export const style = StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    marginRight: 8,
+    marginRight: theme.spacing.regular,
+  },
+  rating: {
+    marginLeft: theme.spacing.regular,
   },
   labelText: {
-    marginLeft: theme.spacing.regular,
+    marginVertical: theme.spacing.regular,
   },
   description: {
     marginTop: theme.spacing.big,
   },
-  seasonContainer: {
-    marginTop: theme.spacing.big,
+  episodeLabel: {
+    marginBottom: theme.spacing.large,
   },
   seasonTitleContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: theme.spacing.big,
+    marginVertical: theme.spacing.big,
   },
   seasonButton: {
     height: 40,
@@ -61,32 +65,5 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 4,
     borderColor: theme.colors.black,
-    marginLeft: theme.spacing.big,
-  },
-  carouselContainer: {
-    paddingBottom: theme.spacing.big,
-  },
-  carousel: {
-    paddingTop: theme.spacing.big,
-    margin: -theme.spacing.big,
-  },
-  carouselContentContainer: {
-    alignItems: 'center',
-  },
-  carouselTitle: {
-    marginBottom: theme.spacing.big,
-  },
-  imageCarousel: {
-    padding: theme.spacing.regular,
-    width: 80,
-    height: 80,
-    borderRadius: 100,
-    marginBottom: theme.spacing.regular,
-    borderWidth: 2,
-    borderColor: theme.colors.black,
-  },
-  carouselContentTitle: {
-    maxWidth: 120,
-    textAlign: 'center',
   },
 });

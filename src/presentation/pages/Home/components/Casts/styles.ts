@@ -9,7 +9,6 @@ export const style = StyleSheet.create({
   },
   carousel: {
     paddingTop: theme.spacing.big,
-    margin: -theme.spacing.big,
   },
   carouselContentContainer: {
     alignItems: 'center',
@@ -24,7 +23,7 @@ export const style = StyleSheet.create({
     borderRadius: 100,
     marginBottom: theme.spacing.regular,
     borderWidth: 2,
-    borderColor: theme.colors.black,
+    borderColor: theme.colors.white,
   },
   carouselContentTitle: {
     maxWidth: 120,

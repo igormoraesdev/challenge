@@ -7,7 +7,7 @@ const {width, height} = Dimensions.get('screen');
 export const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.black,
   },
   image: {
     width,
@@ -17,13 +17,7 @@ export const style = StyleSheet.create({
     padding: theme.spacing.big,
     flex: 1,
   },
-  summaryText: {
-    marginTop: theme.spacing.regular,
-  },
-  textValue: {
-    marginLeft: theme.spacing.regular,
-  },
-  row: {
-    marginVertical: theme.spacing.big,
+  label: {
+    marginVertical: theme.spacing.regular,
   },
 });

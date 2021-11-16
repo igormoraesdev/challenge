@@ -29,15 +29,10 @@ const EpisodeItem = ({episode, onClick}: Props) => {
         />
       </SharedElement>
       <View style={style.episodeContent}>
-        <Typography
-          size="p"
-          fontFamily="roboto"
-          familyType="bold"
-          style={style.episodeTitle}
-        >
+        <Typography size="span" familyType="medium" style={style.episodeTitle}>
           {`EP.${episode?.number} - ${episode?.name}`}
         </Typography>
-        <Typography size="span" familyType="medium">
+        <Typography size="span" familyType="bold">
           {episode?.summary
             ? `${episode?.summary
                 ?.replace(/<p>/g, '')

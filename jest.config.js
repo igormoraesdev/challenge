@@ -11,4 +11,14 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|@react-native-vector-icons|react-navigation-shared-element)',
   ],
+  testPathIgnorePatterns: ['<rootDir>/__tests__/data/mocks'],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    'test-config',
+    'interfaces',
+    'jestGlobalMocks.ts',
+    '.module.ts',
+    '<rootDir>/src/app/main.ts',
+    '<rootDir>/__tests__/data/mocks',
+  ],
 };

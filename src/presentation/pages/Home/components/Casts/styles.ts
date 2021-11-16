@@ -4,11 +4,7 @@ import {theme} from '../../../../styles';
 
 export const style = StyleSheet.create({
   carouselContainer: {
-    paddingBottom: theme.spacing.big,
-    marginHorizontal: theme.spacing.big,
-  },
-  carousel: {
-    paddingTop: theme.spacing.big,
+    paddingBottom: theme.spacing.regular,
   },
   carouselContentContainer: {
     alignItems: 'center',

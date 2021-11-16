@@ -3,6 +3,9 @@ import {StyleSheet} from 'react-native';
 import {theme} from '../../../../styles';
 
 export const style = StyleSheet.create({
+  episodeText: {
+    marginBottom: theme.spacing.large,
+  },
   episodeContentContainer: {
     flexDirection: 'row',
     paddingRight: theme.spacing.big,

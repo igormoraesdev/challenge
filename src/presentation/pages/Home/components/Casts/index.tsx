@@ -13,7 +13,6 @@ const Casts = () => {
         Casts:
       </Typography>
       <FlatList
-        style={style.carousel}
         data={castList}
         keyExtractor={(item) => item.character.name}
         decelerationRate="normal"

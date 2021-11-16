@@ -24,7 +24,7 @@ const EpisodeItem = ({episode, onClick}: Props) => {
           resizeMethod="auto"
           resizeMode="cover"
           source={{
-            uri: episode?.image?.original,
+            uri: `${episode?.image?.original}?${new Date().getTime()}`,
           }}
         />
       </SharedElement>

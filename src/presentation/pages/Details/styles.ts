@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
   },
   image: {
     width,
-    height: height / 3,
+    height: height / 2,
   },
   content: {
     padding: theme.spacing.big,

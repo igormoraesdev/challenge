@@ -13,11 +13,16 @@ import {useDispatch} from 'react-redux';
 
 import {EpisodesModel} from '../../../domain';
 import {RootStackParamList} from '../../../main/routes/navigator';
-import {fetchCasts, fetchEpisodes} from '../../../store/slices/tvshow/api';
+import {
+  fetchCasts,
+  fetchEpisodes,
+  fetchSeasons,
+} from '../../../store/slices/tvshow/api';
 import {Row, Typography} from '../../components';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {theme} from '../../styles';
 import {EpisodeItem} from './components';
+import Casts from './components/Casts';
 import {style} from './styles';
 
 Icon.loadFont();
@@ -25,19 +30,24 @@ Icon.loadFont();
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
-  const {episodesList, castList} = useAppSelector(
+  const {episodesList, seasonsList} = useAppSelector(
     ({tvShowSlice}) => tvShowSlice,
   );
-  const [seasons] = useState<number>(1);
+  const [selectedSeason, setSelectedSeason] = useState<number>(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchEpisodes());
     dispatch(fetchCasts());
+    dispatch(fetchSeasons());
   }, []);
 
   const handleNavigate = (episode: EpisodesModel) => {
     navigation?.navigate('Details', {item: episode});
+  };
+
+  const handleSeason = (seasonNumber: number) => {
+    setSelectedSeason(seasonNumber);
   };
 
   return (
@@ -130,17 +140,34 @@ const Home = ({navigation}: Props) => {
             <Typography size="p" fontFamily="roboto" familyType="bold">
               Seasons:
             </Typography>
-            <TouchableOpacity
-              style={style.seasonButtonSelected}
-              activeOpacity={0.7}
-            >
-              <Typography size="h3" familyType="bold">
-                1
-              </Typography>
-            </TouchableOpacity>
+            {seasonsList?.map((season) => (
+              <TouchableOpacity
+                key={season?.id}
+                onPress={() => handleSeason(season?.number)}
+                activeOpacity={0.7}
+              >
+                <MotiView
+                  animate={{
+                    backgroundColor:
+                      season.number === selectedSeason
+                        ? theme.colors.blue
+                        : 'transparent',
+                  }}
+                  transition={{
+                    type: 'timing',
+                    duration: 300,
+                  }}
+                  style={style.seasonButton}
+                >
+                  <Typography size="h3" familyType="bold">
+                    {season?.number}
+                  </Typography>
+                </MotiView>
+              </TouchableOpacity>
+            ))}
           </MotiView>
           {episodesList
-            ?.filter((episode) => episode?.season === seasons)
+            ?.filter((episode) => episode?.season === selectedSeason)
             ?.map((episode, index) => (
               <MotiView
                 from={{
@@ -152,8 +179,8 @@ const Home = ({navigation}: Props) => {
                   translateX: 0,
                 }}
                 transition={{
-                  delay: index * 100,
-                  duration: 500,
+                  delay: index * 10,
+                  duration: 300,
                   type: 'timing',
                 }}
                 key={episode?.id}
@@ -162,45 +189,8 @@ const Home = ({navigation}: Props) => {
               </MotiView>
             ))}
         </View>
-        <View style={style.carouselContainer}>
-          <Typography
-            style={style.carouselTitle}
-            fontFamily="roboto"
-            familyType="bold"
-            size="p"
-          >
-            Casts:
-          </Typography>
-          <FlatList
-            style={style.carousel}
-            data={castList}
-            keyExtractor={(item) => item.character.name}
-            decelerationRate="normal"
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            ItemSeparatorComponent={() => <View style={{width: 20}} />}
-            renderItem={({item}) => (
-              <View style={style.carouselContentContainer}>
-                <Image
-                  style={style.imageCarousel}
-                  resizeMethod="auto"
-                  resizeMode="cover"
-                  source={{
-                    uri: item?.character?.image?.original,
-                  }}
-                />
-                <Typography
-                  familyType="medium"
-                  size="span"
-                  style={style.carouselContentTitle}
-                >
-                  {item?.character?.name}
-                </Typography>
-              </View>
-            )}
-          />
-        </View>
       </View>
+      <Casts />
     </ScrollView>
   );
 };

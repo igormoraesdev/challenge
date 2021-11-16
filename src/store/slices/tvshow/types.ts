@@ -1,4 +1,5 @@
 import {EpisodesModel} from '../../../domain';
+import {CastModel} from '../../../domain/models/cast';
 
 export const tvShowSliceName = 'tvShowSlice' as const;
 
@@ -10,12 +11,10 @@ export const TV_SHOWS_SLICE_ACTIONS = {
 
 export const TV_SHOWS_SLICE_INITIAL_STATE: TvShowSliceState = {
   episodesList: [],
-  error: null,
-  status: 'idle',
+  castList: [],
 };
 
 export type TvShowSliceState = {
   episodesList: EpisodesModel[];
-  error: null | string;
-  status: 'loading' | 'idle';
+  castList: CastModel[];
 };

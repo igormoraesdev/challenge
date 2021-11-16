@@ -7,8 +7,9 @@ import {
   TV_SHOWS_SLICE_INITIAL_STATE,
 } from '.';
 import {EpisodesModel} from '../../../domain';
+import {CastModel} from '../../../domain/models/cast';
 import {setEpisodesReducer} from './actions';
-import {fetchEpisodes} from './api';
+import {fetchCasts, fetchEpisodes} from './api';
 
 export const tvShowSlice = createSlice<
   TvShowSliceState,
@@ -21,12 +22,11 @@ export const tvShowSlice = createSlice<
     [SET_EPISODES]: setEpisodesReducer,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchEpisodes.pending, (state) => {
-      state.status = 'loading';
-      state.error = null;
-    });
     builder.addCase(fetchEpisodes.fulfilled, (state, {payload}) => {
       state.episodesList = payload as EpisodesModel[];
+    });
+    builder.addCase(fetchCasts.fulfilled, (state, {payload}) => {
+      state.castList = payload as CastModel[];
     });
   },
 });

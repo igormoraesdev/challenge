@@ -26,6 +26,6 @@ Following the concept of Clean Architecture and DDD, the architecture was design
 ## Configure React Native
 - Follow this steps (https://reactnative.dev/docs/environment-setup)
 
-- When you have finished configuring react native, follow these steps --> **yarn** and **yarn android**.
+- When you have finished configuring react native, in the project folder run **yarn** and **yarn android**.
 
 Bee happy.

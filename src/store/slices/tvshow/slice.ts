@@ -1,14 +1,12 @@
 import {createSlice, SliceCaseReducers} from '@reduxjs/toolkit';
 
 import {
-  SET_EPISODES,
   tvShowSliceName,
   TvShowSliceState,
   TV_SHOWS_SLICE_INITIAL_STATE,
 } from '.';
 import {EpisodesModel, SeasonsModel, ShowInfoModel} from '../../../domain';
 import {CastModel} from '../../../domain/models/cast';
-import {setEpisodesReducer} from './actions';
 import {fetchCasts, fetchEpisodes, fetchSeasons, fetchShowInfo} from './api';
 
 export const tvShowSlice = createSlice<
@@ -18,9 +16,7 @@ export const tvShowSlice = createSlice<
 >({
   name: tvShowSliceName,
   initialState: TV_SHOWS_SLICE_INITIAL_STATE,
-  reducers: {
-    [SET_EPISODES]: setEpisodesReducer,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchEpisodes.fulfilled, (state, {payload}) => {
       state.episodesList = payload as EpisodesModel[];

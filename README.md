@@ -22,6 +22,10 @@ Following the concept of Clean Architecture and DDD, the architecture was design
 - [Lint-Staged](https://github.com/okonet/lint-staged)
 
 ## Start project
-- In project folder run **yarn** and **yarn android**.
+
+## Configure React Native
+- Follow this steps (https://reactnative.dev/docs/environment-setup)
+
+- When you have finished configuring react native, follow these steps --> **yarn** and **yarn android**.
 
 Bee happy.

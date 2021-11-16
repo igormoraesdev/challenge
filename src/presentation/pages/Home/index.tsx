@@ -1,13 +1,19 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MotiView} from 'moti';
 import React, {useEffect, useState} from 'react';
-import {View, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useDispatch} from 'react-redux';
 
 import {EpisodesModel} from '../../../domain';
 import {RootStackParamList} from '../../../main/routes/navigator';
-import {fetchEpisodes} from '../../../store/slices/tvshow/api';
+import {fetchCasts, fetchEpisodes} from '../../../store/slices/tvshow/api';
 import {Row, Typography} from '../../components';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {theme} from '../../styles';
@@ -19,12 +25,15 @@ Icon.loadFont();
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
-  const {episodesList} = useAppSelector(({tvShowSlice}) => tvShowSlice);
+  const {episodesList, castList} = useAppSelector(
+    ({tvShowSlice}) => tvShowSlice,
+  );
   const [seasons] = useState<number>(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchEpisodes());
+    dispatch(fetchCasts());
   }, []);
 
   const handleNavigate = (episode: EpisodesModel) => {
@@ -48,7 +57,6 @@ const Home = ({navigation}: Props) => {
           transition={{
             type: 'timing',
             duration: 500,
-            delay: 500,
           }}
         >
           <Typography
@@ -154,7 +162,7 @@ const Home = ({navigation}: Props) => {
               </MotiView>
             ))}
         </View>
-        {/* <View style={style.carouselContainer}>
+        <View style={style.carouselContainer}>
           <Typography
             style={style.carouselTitle}
             fontFamily="roboto"
@@ -165,32 +173,33 @@ const Home = ({navigation}: Props) => {
           </Typography>
           <FlatList
             style={style.carousel}
-            data={[1, 2, 3, 4, 5, 6, 7, 8]}
+            data={castList}
+            keyExtractor={(item) => item.character.name}
             decelerationRate="normal"
             showsHorizontalScrollIndicator={false}
             horizontal
-            ItemSeparatorComponent={() => <View style={{width: 16}} />}
-            renderItem={() => (
+            ItemSeparatorComponent={() => <View style={{width: 20}} />}
+            renderItem={({item}) => (
               <View style={style.carouselContentContainer}>
                 <Image
                   style={style.imageCarousel}
                   resizeMethod="auto"
                   resizeMode="cover"
                   source={{
-                    uri: 'https://static.tvmaze.com/uploads/images/original_untouched/25/64242.jpg',
+                    uri: item?.character?.image?.original,
                   }}
                 />
                 <Typography
                   familyType="medium"
-                  size="h4"
-                  style={style.labelText}
+                  size="span"
+                  style={style.carouselContentTitle}
                 >
-                  Bubbles
+                  {item?.character?.name}
                 </Typography>
               </View>
             )}
           />
-        </View> */}
+        </View>
       </View>
     </ScrollView>
   );

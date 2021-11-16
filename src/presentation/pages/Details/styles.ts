@@ -7,10 +7,11 @@ const {width, height} = Dimensions.get('screen');
 export const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.white,
   },
   image: {
     width,
-    height: height / 2,
+    height: height / 3,
   },
   content: {
     padding: theme.spacing.big,

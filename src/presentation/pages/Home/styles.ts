@@ -84,7 +84,6 @@ export const style = StyleSheet.create({
   },
   carouselContentContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
   },
   carouselTitle: {
     marginBottom: theme.spacing.big,
@@ -97,5 +96,9 @@ export const style = StyleSheet.create({
     marginBottom: theme.spacing.regular,
     borderWidth: 2,
     borderColor: theme.colors.black,
+  },
+  carouselContentTitle: {
+    maxWidth: 150,
+    textAlign: 'center',
   },
 });

@@ -5,18 +5,17 @@ import {SharedElement} from 'react-navigation-shared-element';
 
 import {EpisodesModel} from '../../../../../domain';
 import {Typography} from '../../../../components';
-import {useAppSelector} from '../../../../hooks/use-app-selector';
 import {style} from './styles';
 
 type Props = {
   selectedSeason: number;
+  episodesList: EpisodesModel[];
   onClick: (episode: EpisodesModel) => void;
 };
 
-const EpisodeList = ({selectedSeason, onClick}: Props) => {
-  const {episodesList} = useAppSelector(({tvShowSlice}) => tvShowSlice);
+const EpisodeList = ({selectedSeason, episodesList, onClick}: Props) => {
   return (
-    <>
+    <View testID="episode">
       <Typography style={style.episodeText} familyType="medium" size="p">
         Episodes:
       </Typography>
@@ -40,6 +39,7 @@ const EpisodeList = ({selectedSeason, onClick}: Props) => {
             key={episode?.id}
           >
             <TouchableOpacity
+              testID="episode-button"
               onPress={() => onClick(episode)}
               activeOpacity={0.7}
               style={style.episodeContentContainer}
@@ -73,7 +73,7 @@ const EpisodeList = ({selectedSeason, onClick}: Props) => {
             </TouchableOpacity>
           </MotiView>
         ))}
-    </>
+    </View>
   );
 };
 

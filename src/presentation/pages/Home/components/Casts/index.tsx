@@ -1,18 +1,22 @@
 import React from 'react';
 import {FlatList, Image, View} from 'react-native';
 
+import {CastModel} from '../../../../../domain';
 import {Typography} from '../../../../components';
-import {useAppSelector} from '../../../../hooks/use-app-selector';
 import {style} from './styles';
 
-const Casts = () => {
-  const {castList} = useAppSelector(({tvShowSlice}) => tvShowSlice);
+type Props = {
+  castList: CastModel[];
+};
+
+const Casts = ({castList}: Props) => {
   return (
     <View style={style.carouselContainer}>
       <Typography style={style.carouselTitle} familyType="medium" size="p">
         Casts:
       </Typography>
       <FlatList
+        testID="flatlist"
         data={castList}
         keyExtractor={(item) => item.character.name}
         decelerationRate="normal"

@@ -18,7 +18,9 @@ import {style} from './styles';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
-  const {showInfo} = useAppSelector(({tvShowSlice}) => tvShowSlice);
+  const {showInfo, castList, seasonsList, episodesList} = useAppSelector(
+    ({tvShowSlice}) => tvShowSlice,
+  );
   const [selectedSeason, setSelectedSeason] = useState<number>(1);
   const dispatch = useDispatch();
 
@@ -49,9 +51,17 @@ const Home = ({navigation}: Props) => {
       />
       <View style={style.containerContent}>
         <Info />
-        <Casts />
-        <SeasonList selectedSeason={selectedSeason} onClick={handleSeason} />
-        <EpisodeList onClick={handleNavigate} selectedSeason={selectedSeason} />
+        <Casts castList={castList} />
+        <SeasonList
+          seasonsList={seasonsList}
+          selectedSeason={selectedSeason}
+          onClick={handleSeason}
+        />
+        <EpisodeList
+          episodesList={episodesList}
+          onClick={handleNavigate}
+          selectedSeason={selectedSeason}
+        />
       </View>
     </ScrollView>
   );

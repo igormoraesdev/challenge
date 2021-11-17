@@ -1,21 +1,21 @@
 import {MotiView} from 'moti';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 
+import {SeasonsModel} from '../../../../../domain';
 import {Typography} from '../../../../components';
-import {useAppSelector} from '../../../../hooks/use-app-selector';
 import {theme} from '../../../../styles';
 import {style} from './styles';
 
 type Props = {
   onClick: (seasonNumber: number) => void;
   selectedSeason: number;
+  seasonsList: SeasonsModel[];
 };
 
-const SeasonList = ({onClick, selectedSeason}: Props) => {
-  const {seasonsList} = useAppSelector(({tvShowSlice}) => tvShowSlice);
+const SeasonList = ({onClick, selectedSeason, seasonsList}: Props) => {
   return (
-    <>
+    <View testID="season">
       <Typography familyType="medium" size="p">
         Seasons:
       </Typography>
@@ -31,6 +31,7 @@ const SeasonList = ({onClick, selectedSeason}: Props) => {
       >
         {seasonsList?.map((season) => (
           <TouchableOpacity
+            testID="season-button"
             key={season?.id}
             onPress={() => onClick(season?.number)}
             activeOpacity={0.7}
@@ -55,7 +56,7 @@ const SeasonList = ({onClick, selectedSeason}: Props) => {
           </TouchableOpacity>
         ))}
       </MotiView>
-    </>
+    </View>
   );
 };
 
